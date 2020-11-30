@@ -1,0 +1,230 @@
+//Nicole Sedlack, October 3,2020, provides a user with a virtual theatre experience
+
+#define _CRT_SECURE_NO_WARNINGS //for Visual studio compiler
+#include<stdio.h> //for printf and scanf
+#include<ctype.h> //for toupper function
+
+//function prototypes
+
+void Greeting();
+//welcome the user to the theatre
+
+int DisplayFilms();
+//display films and rating
+//asks, gets, and returns user selection
+
+void AgeCompare(int age, int film);
+//compares the user's age to the film rating
+//assumes the user will input a positive integer 
+//if the user is too young, they will be prompted to select another film 
+//once the user selects a film they can watch, say goodbye to user
+
+void DisplayMenu();
+//display beverage/food options and prices
+//asks, gets, and returns the item number
+
+int main()
+{
+	//declare variables
+	int age;
+	int film;
+
+	//greet the user
+	Greeting();
+
+	//display film options
+	film = DisplayFilms();
+
+	//get age, compare to film choice
+	printf("\nPlease input the age on your ID: ");
+	scanf("%d", &age);
+
+	//AgeCompare(age, film);
+	AgeCompare(age, film);
+
+	//display the menu and allow the user to choose a snack 
+	DisplayMenu();
+
+	//say goodbye to the user
+	printf("Enjoy your film!");
+	return 0;
+}
+
+
+//function definitions
+
+void Greeting()
+{
+	//Welcome the user 
+	printf("Welcome to Virtual Theatre! \n\n");
+
+	//Explain process of choosing a film and ordering a snack  
+	printf("You will be presented with a list of films and their rating.\n\n");
+	printf("Only viewers older than 13 are allowed into PG-13 films.\n");
+	printf("Only viewers older than 17 are allowed into R rated films.\n");
+	printf("When you are ready for your selection, please select the number for the film you would like to view.\n");
+	printf("If you are not old enough for the film,\nyou will have to choose another.\n");
+	printf("After picking a film, you are welcome to visit the snack bar!\n");
+}
+
+int DisplayFilms()
+{
+	int choice;
+	//display the films and ratings currently available at the theatre
+	printf("\n Film                    Rating\n");
+	printf("_________________________________\n");
+	printf("1. The Book of Life        PG\n");
+	printf("2. The King's Speech       R\n");
+	printf("3. La La Land              PG-13\n");
+	printf("4. Moonlight               R\n");
+	printf("5. Pride and Predjudice    PG \n");
+	printf("6. Slumdog Millionaire     R\n");
+	printf("7. The Truman Show         PG\n");
+	printf("\nWhich film would you like to watch? ");
+	scanf("%d", &choice);
+	return choice;
+}
+
+void AgeCompare(int age, int film)
+{
+	if (film % 2 == 0) // check if film number is even since films 2, 4, and 6 are rated 'R'
+	{
+		switch (age)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+			printf("\nYou are too young for this film, please choose another\n\n");
+			film = DisplayFilms();
+			AgeCompare(age, film);
+			break;
+
+		default:
+			printf("\nHere is your ticket!");
+		}
+	}
+	else if (film == 3) //checks age for 'PG-13' film 
+	{
+		switch (age)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+			printf("\nYou are too young for this film, please choose another\n\n");
+			film = DisplayFilms();
+			AgeCompare(age, film);
+			break;
+
+		default:
+			printf("\nHere is your ticket!");
+		}
+	}
+	else
+	{
+		printf("\nHere is your ticket!");
+	}
+}
+
+void DisplayMenu()
+{
+	int choice;
+	char again;
+	char size;
+
+	//display beverage/food options and prices
+	printf("\n\n*****************************************");
+	printf("\n\nWelcome to the Theatre Snack Bar!\nHere are your options:\n\n");
+	printf("1. Pretzel\n");
+	printf("2. Buttered Popcorn (S,M,L)\n");
+	printf("3. Plain Popcorn (S,M,L)\n");
+	printf("4. Soda\n");
+	printf("5. Iced Tea\n");
+	printf("6. Water\n\n");
+
+	//prompt selection
+	printf("If you would not like anything please type in '0', otherwise select a menu option: ");
+	scanf("%d", &choice);
+
+	switch (choice)
+	{
+	case 0:
+		break;
+
+	case 1:
+		printf("\nHere is your pretzel, would you like anything else? Y/N\n");
+
+	case 2:
+		printf("\nWhat size would you like?");
+		scanf(" %c", &size);
+
+		switch (size)
+		{
+		case 's':
+		case 'S':
+			printf("\nHere is your small buttered popcorn, would you like anything else? Y/N\n");
+
+		case 'm':
+		case 'M':
+			printf("\nHere is your medium buttered popcorn, would you like anything else? Y/N\n");
+
+		case 'l':
+		case 'L':
+			printf("\nHere is your large buttered popcorn, would you like anything else? Y/N\n");
+		}
+
+	case 3:
+		printf("\nWhat size would you like?");
+		scanf(" %c", &size);
+		switch(size)
+		{
+		case 's':
+		case 'S':
+			printf("\nHere is your small buttered popcorn, would you like anything else? Y/N\n");
+
+		case 'm':
+		case 'M':
+			printf("\nHere is your medium buttered popcorn, would you like anything else? Y/N\n");
+
+		case 'l':
+		case 'L':
+			printf("\nHere is your large plain popcorn, would you like anything else? Y/N\n");
+		}
+
+	case 4:
+		printf("\nHere is your soda, would you like anything else? Y/N\n");
+
+	case 5:
+		printf("\nHere is your iced tea, would you like anything else? Y/N\n");
+
+	case 6:
+		printf("\nHere is your water, would you like anything else? Y/N\n");
+	}
+
+	scanf(" %c", &again);
+	if (again == 'y' || again == 'Y')
+	{
+		DisplayMenu();
+	}
+}
